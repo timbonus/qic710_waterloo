@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def qubit_norm(state: np.array):
+def quantum_state_norm(state: np.array):
     return np.sum(np.square(np.absolute(state)))
 
 
@@ -15,7 +15,7 @@ class QubitCartesian:
         self._validate_state()
 
     def _validate_state(self):
-        if not np.isclose(qubit_norm(self.state), 1.0):
+        if not np.isclose(quantum_state_norm(self.state), 1.0):
             raise ValueError('state definition does not have unit norm')
 
     def to_euler(self):

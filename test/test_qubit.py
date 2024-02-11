@@ -7,6 +7,12 @@ from qubit import QubitCartesian, QubitEuler
 
 class TestQubitCartesian(unittest.TestCase):
 
+    def test_validate_state(self):
+        self.assertEqual(QubitCartesian(zero=1/np.sqrt(2), one=-1j/np.sqrt(2)).zero,
+                         1/np.sqrt(2))
+        with self.assertRaises( ValueError ) as _:
+            QubitCartesian(zero=1, one=-1j)
+
     def test_to_cartesian(self):
         q = QubitCartesian(zero=1, one=0)
         q_e = q.to_euler()
