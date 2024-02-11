@@ -19,14 +19,11 @@ class QubitCartesian:
             raise ValueError('state definition does not have unit norm')
 
     def to_euler(self):
-        # global phase rotation to achieve purely real |0>
-        global_phase = -np.angle(self.zero)
-        standard_zero = self.zero * (np.cos(global_phase) + np.sin(global_phase) * 1j)
-        standard_one = self.one * (np.cos(global_phase) + np.sin(global_phase) * 1j)
-        theta = 2 * np.arccos(standard_zero)
-        phi = 0   # default value for phi when state equals |0>
-        if theta != 0.0:  # i.e. state is not exactly |0>
-            phi = np.angle(standard_one)
+        global_phase = -np.angle(self.zero)                  # global phase rotation to achieve purely real |0>
+        theta = 2 * np.arccos(np.absolute(self.zero))        # length of |0> determines theta
+        phi = 0                                              # default value for phi when state equals |0>
+        if theta != 0.0:                                     # i.e. state is not exactly |0>
+            phi = np.angle(self.one) + global_phase          # phi is original complex angle of |1> minus global phase
         return QubitEuler(theta=theta, phi=phi)
 
 
