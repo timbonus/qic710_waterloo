@@ -13,7 +13,7 @@ class TestQubitCartesian(unittest.TestCase):
         with self.assertRaises( ValueError ) as _:
             QubitCartesian(zero=1, one=-1j)
 
-    def test_to_cartesian(self):
+    def test_to_euler_remove_global_phase(self):
         q = QubitCartesian(zero=1, one=0)
         q_e = q.to_euler()
         self.assertAlmostEqual(q_e.theta, 0)
@@ -28,6 +28,22 @@ class TestQubitCartesian(unittest.TestCase):
         q_e = q.to_euler()
         self.assertAlmostEqual(q_e.theta, 2*np.arccos(0.6))
         self.assertAlmostEqual(q_e.phi, -np.arctan(2/np.sqrt(5)))
+
+    def test_to_euler_no_rotation(self):
+        q = QubitCartesian(zero=1, one=0)
+        q_e = q.to_euler()
+        self.assertAlmostEqual(q_e.theta, 0)
+        self.assertAlmostEqual(q_e.phi, 0)
+
+        q = QubitCartesian(zero=0, one=1j)
+        q_e = q.to_euler()
+        self.assertAlmostEqual(q_e.theta, np.pi)
+        self.assertAlmostEqual(q_e.phi, np.pi / 2)
+
+        q = QubitCartesian(zero=np.sqrt(5) / 5 + 2 / 5 * 1j, one=4 / 5)
+        q_e = q.to_euler()
+        self.assertAlmostEqual(q_e.theta, 2 * np.arccos(0.6))
+        self.assertAlmostEqual(q_e.phi, -np.arctan(2 / np.sqrt(5)))
 
 
 class TestQubitEuler(unittest.TestCase):
