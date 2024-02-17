@@ -1,2 +1,2 @@
-# qic710_waterloo
-In-depth exploration of QIC710
+# QIT
+In-depth exploration of introductory quantum information theory.
