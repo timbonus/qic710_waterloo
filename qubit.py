@@ -7,7 +7,7 @@ def quantum_state_norm(state: np.array):
 
 class QubitCartesian:
 
-    def __init__(self, zero: 'complex', one: 'complex'):
+    def __init__(self, zero: complex, one: complex ):
 
         self.zero = zero
         self.one = one
