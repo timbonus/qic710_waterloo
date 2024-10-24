@@ -12,7 +12,7 @@ class QubitCartesian:
         self.zero = zero
         self.one = one
         self.global_phase = -np.angle(self.zero)  # global phase rotation to achieve purely real |0>
-        self.state = np.array([self.zero, self.one], dtype='complex' )
+        self.state = np.array([self.zero, self.one], dtype='complex')
         self._validate_state()
 
     def _validate_state(self):
@@ -47,6 +47,8 @@ class QubitBloch:
             zero = zero * euler_rotation
             one = one * euler_rotation
         return QubitCartesian(zero=zero, one=one)
+
+
 
 
 # now have way of representing qubits need to:
